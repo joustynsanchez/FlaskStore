@@ -82,7 +82,6 @@ def UserIndex(email):
 def search():
     # Obtiene el término de búsqueda del cuerpo de la solicitud AJAX
     search_term = request.json['searchTerm']
-    print(search_term)
 
     # Realiza la consulta a la base de datos para obtener los resultados
     cur = database.connection.cursor()
@@ -102,6 +101,29 @@ def searchProduct(id):
     results = cur.fetchall()
     return render_template('productSearch.html', results=results)
 
+@app.route('/TecnologiaYElectronicos')
+def CategoriaTec():
+    cur = database.connection.cursor()
+    cur.execute("SELECT * FROM articuloscategoria")
+    data = cur.fetchall()
+    categoria = [{'id': result[0], 'nombre': result[1], 'precio': result[3], 'categoria_id' : result[2]} for result in data if result[2] == 1]
+    return render_template('categoriaTecno.html', data=categoria)
+
+@app.route('/electrodomesticos')
+def CategoriaElectrod():
+    cur = database.connection.cursor()
+    cur.execute("SELECT * FROM articuloscategoria")
+    data = cur.fetchall()
+    categoria = [{'id': result[0], 'nombre': result[1], 'precio': result[3], 'categoria_id' : result[2]} for result in data if result[2] == 2]
+    return render_template('categoriaElectro.html', data = categoria)
+
+@app.route('/agregarCarrito/<string:id>', methods = ["POST", "GET"])
+def AgregarCarrito(id):
+    cur = database.connection.cursor()
+    cur.execute("SELECT * FROM articuloscategoria")
+    data = cur.fetchall()
+    for producto in data:
+        print(producto)
 
 
 if __name__ == '__main__':
