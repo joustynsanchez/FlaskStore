@@ -3,10 +3,10 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'JostinYAnia12345'
-app.config['MYSQL_DB'] = 'FlaskStore'
+app.config['MYSQL_HOST'] = '192.168.0.18'
+app.config['MYSQL_USER'] = 'Dago4Real'
+app.config['MYSQL_PASSWORD'] = 'Dago$12345.'
+app.config['MYSQL_DB'] = 'flaskstore'
 database = MySQL(app)
 
 app.secret_key = "mysecretkey"
@@ -85,7 +85,7 @@ def search():
 
     # Realiza la consulta a la base de datos para obtener los resultados
     cur = database.connection.cursor()
-    query = f"SELECT * FROM articulos WHERE nombreArticulo LIKE '%{search_term}%'"
+    query = f"SELECT * FROM articuloscategoria WHERE nombre LIKE '%{search_term}%'"
     cur.execute(query)
     results = cur.fetchall()
 
@@ -96,7 +96,7 @@ def search():
 def searchProduct(id):
     search_term = request.args.get('searchTerm')  # Obtener el término de búsqueda de los parámetros de la solicitud
     cur = database.connection.cursor()
-    query = f"SELECT * FROM articulos WHERE nombreArticulo LIKE '%{search_term}%'"
+    query = f"SELECT * FROM articuloscategoria WHERE nombre LIKE '%{search_term}%'"
     cur.execute(query)
     results = cur.fetchall()
     return render_template('productSearch.html', results=results)
@@ -116,6 +116,14 @@ def CategoriaElectrod():
     data = cur.fetchall()
     categoria = [{'id': result[0], 'nombre': result[1], 'precio': result[3], 'categoria_id' : result[2]} for result in data if result[2] == 2]
     return render_template('categoriaElectro.html', data = categoria)
+
+@app.route('/Hogar')
+def CategoriaHogar():
+    cur = database.connection.cursor()
+    cur.execute("SELECT * FROM articuloscategoria")
+    data = cur.fetchall()
+    categoria = [{'id': result[0], 'nombre': result[1], 'precio': result[3], 'categoria_id' : result[2]} for result in data if result[2] == 3]
+    return render_template('categoriaHogar.html', data = categoria)
 
 @app.route('/agregarCarrito/<string:id>', methods = ["POST", "GET"])
 def AgregarCarrito(id):

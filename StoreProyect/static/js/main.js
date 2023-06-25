@@ -7,7 +7,7 @@ searchInput.addEventListener("input", () => {
   if (searchTerm.trim() === "") {
     // Restablecer el contenedor de resultados si el campo de búsqueda está vacío
     searchResults.innerHTML = "";
-    searchResults.classList.add("hidden-card-result");
+    searchResults.classList.remove('has-results');
     return;
   }
 
@@ -25,9 +25,6 @@ searchInput.addEventListener("input", () => {
       searchResults.innerHTML = "";
 
       if (data.results.length > 0) {
-        // Mostrar el contenedor de resultados si hay resultados disponibles
-        searchResults.classList.remove("hidden-card-result");
-
         // Crear una lista para los resultados
         const resultList = document.createElement("ul");
         resultList.classList.add("list-group", "pt-2");
@@ -48,9 +45,12 @@ searchInput.addEventListener("input", () => {
 
         // Agregar la lista de resultados al contenedor
         searchResults.appendChild(resultList);
+
+        // Mostrar el contenedor de resultados si hay resultados disponibles
+        searchResults.classList.add('has-results');
       } else {
         // Ocultar el contenedor de resultados si no hay resultados disponibles
-        searchResults.classList.add("hidden-card-result");
+        searchResults.classList.remove('has-results');
       }
     })
     .catch((error) => {

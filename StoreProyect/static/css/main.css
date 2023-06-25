@@ -1,3 +1,44 @@
-.hidden-card-result {
-    display: none;
+.navbar {
+    position: relative;
+    background-color: #232222;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    z-index: 4;
+    
+}
+
+#search-input {
+    width: 75%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #232222;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+}
+
+.search-results-dropdown {
+    width: 17%; /* This will make the width of the search results the same as the search bar */
+    max-height: 75px;
+    overflow-y: visible;
+    border: 1px solid #ffff;
+    border-radius: 5px;
+    background-color: #ffff;
+}
+
+
+#search-results {
+    position: absolute;
+    width: 17%;
+    max-height: 85px;
+    overflow-y: visible;
+    border: 1px solid #ffff;
+    border-radius: 5px;
+    background-color: #ffff;
+    z-index: 1;
+    display: none; 
+}
+
+#search-results.has-results {
+    display: block; /* The search results dropdown is displayed when it has results */
 }
