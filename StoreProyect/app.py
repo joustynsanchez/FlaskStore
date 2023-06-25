@@ -125,14 +125,20 @@ def CategoriaHogar():
     categoria = [{'id': result[0], 'nombre': result[1], 'precio': result[3], 'categoria_id' : result[2]} for result in data if result[2] == 3]
     return render_template('categoriaHogar.html', data = categoria)
 
-@app.route('/agregarCarrito/<string:id>', methods = ["POST", "GET"])
+@app.route('/agregarCarrito/<string:id>', methods=["POST", "GET"])
 def AgregarCarrito(id):
     cur = database.connection.cursor()
-    cur.execute("SELECT * FROM articuloscategoria")
+    cur.execute('SELECT * FROM articuloscategoria WHERE id = %s', (id,))
     data = cur.fetchall()
     for producto in data:
-        print(producto)
-
+        idProducto = producto[0]
+        nombre = producto[1]
+        idCategoria = producto[2]
+        precio = producto[3]
+        cur.execute('INSERT INTO carrito (nombre, id_categoria, precio) VALUES (%s, %s, %s)', (nombre, idCategoria, precio,))    
+        database.connection.commit()
+    flash('Producto agregado')
+    return redirect(url_for('CategoriaTec'))
 
 if __name__ == '__main__':
     app.run(port = 4000, debug=True)
