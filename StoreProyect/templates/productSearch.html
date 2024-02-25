@@ -1,1 +1,92 @@
-{% extends 'layout.html' %} {% block body %} {% endblock %}
+{% extends 'layout.html' %} {% block body %}
+<div
+  id="search-results"
+  class="card position-absolute top-17 end-0 translate-middle-y mt-4 col-md-2 card mt-2 hidden-card-result"
+>
+  <div
+    class="card mt-2 hidden-card-result"
+    data-bs-toggle="popover"
+    data-bs-title="Popover title"
+  >
+    <div class="card-body" id="card-result">
+      <div class="list-group pt-5"></div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4 offset-md-4 pt-3">
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+</div>
+<div class="card-container-productSearch">
+  <div class="card-image-productSearch">
+    <img
+      src="{{ url_for('static', filename='images/razer-bundles.jpg') }}"
+      alt="razer-bundles"
+      class="card-image-productS"
+    />
+  </div>
+  <div class="container-ProductSearch">
+    <div class="card-body-product-productSearch">
+      {% for data in results %}
+      <div class="card-info-product">
+        <p class="text-title-product">{{ data[1] }}</p>
+        <p class="text-body-product">Lorem Text</p>
+      </div>
+      <div class="card-footer-product">
+        <p class="text-title-product">Precio: ₡ {{ data[3] }}</p>
+      </div>
+      <div class="card-body button-container card-button-product">
+        <a
+          href="/agregarCarrito/{{ data[0] }}"
+          class="card-link btn btn-dark CartBtn"
+        >
+          <span class="IconContainer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 576 512"
+              fill="rgb(17, 17, 17)"
+              class="cart"
+            >
+              <path
+                d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+              ></path>
+            </svg>
+          </span>
+          <p class="text">Carrito</p>
+        </a>
+        <a
+          href="/AgregarListaDeDeseos/{{ data[0] }}"
+          class="card-link btn btn-dark deseo-button"
+        >
+          <svg
+            viewBox="0 0 17.503 15.625"
+            height="10"
+            width="10"
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+          >
+            <path
+              transform="translate(0 0)"
+              d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z"
+              id="Fill"
+            ></path>
+          </svg>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

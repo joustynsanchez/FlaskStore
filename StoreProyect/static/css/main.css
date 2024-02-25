@@ -1,44 +1,639 @@
 .navbar {
-    position: relative;
-    background-color: #232222;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-    z-index: 4;
-    
+  position: relative;
+  background-color: #232222;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  z-index: 4;
 }
 
 #search-input {
-    width: 75%;
-    height: 50px;
-    border-radius: 5px;
-    border: 1px solid #232222;
-    padding: 10px;
-    font-size: 18px;
-    outline: none;
+  width: 75%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #232222;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
 }
 
 .search-results-dropdown {
-    width: 17%; /* This will make the width of the search results the same as the search bar */
-    max-height: 75px;
-    overflow-y: visible;
-    border: 1px solid #ffff;
-    border-radius: 5px;
-    background-color: #ffff;
+  width: 17%; /* This will make the width of the search results the same as the search bar */
+  max-height: 75px;
+  overflow-y: visible;
+  border: 1px solid #ffff;
+  border-radius: 5px;
+  background-color: #ffff;
 }
 
-
 #search-results {
-    position: absolute;
-    width: 17%;
-    max-height: 85px;
-    overflow-y: visible;
-    border: 1px solid #ffff;
-    border-radius: 5px;
-    background-color: #ffff;
-    z-index: 1;
-    display: none; 
+  position: absolute;
+  width: 17%;
+  max-height: 85px;
+  overflow-y: visible;
+  border: 1px solid #ffff;
+  border-radius: 5px;
+  background-color: #ffff;
+  z-index: 1;
+  display: none;
 }
 
 #search-results.has-results {
-    display: block; /* The search results dropdown is displayed when it has results */
+  display: block; /* The search results dropdown is displayed when it has results */
 }
+
+.product-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.enlace-userAccount {
+  align-items: center;
+  appearance: none;
+  background-color: #fcfcfd;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,
+    rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395a;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+}
+
+.enlace-userAccount:focus {
+  box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+}
+
+.enlace-userAccount:hover {
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.enlace-userAccount:active {
+  box-shadow: #d6d6e7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* El espacio entre los botones */
+}
+
+.deseo-button {
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  position: relative;
+  background-color: black;
+}
+
+.deseo-button::after {
+  content: "like";
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  opacity: 0;
+  transition: 0.2s linear;
+  top: 115%;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  transition: 0.2s linear;
+}
+
+.icon path {
+  fill: white;
+  transition: 0.2s linear;
+}
+
+.deseo-button:hover > .icon {
+  transform: scale(1.2);
+}
+
+.deseo-button:hover > .icon path {
+  fill: rgb(177, 139, 189);
+}
+
+.btn:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+
+.CartBtn {
+  width: 120px;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.5s;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+}
+
+.IconContainer {
+  position: absolute;
+  left: -50px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: 0.5s;
+}
+
+.icon {
+  border-radius: 1px;
+}
+
+.text {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+  transition-duration: 0.5s;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.CartBtn:hover .IconContainer {
+  transform: translateX(58px);
+  border-radius: 40px;
+  transition-duration: 0.5s;
+}
+
+.CartBtn:hover .text {
+  transform: translate(10px, 0px);
+  transition-duration: 0.5s;
+}
+
+.CartBtn:active {
+  transform: scale(0.95);
+  transition-duration: 0.5s;
+}
+
+.main-container-wishlist {
+  display: flex;
+}
+.cards-container {
+  /* Establecer la propiedad flex para el contenedor */
+  display: flex;
+  /* Alinear el contenido a la derecha */
+  justify-content: flex-end;
+  /* Alinear los elementos en columna */
+  flex-direction: column;
+}
+
+.card-container{
+  margin-right: 50px;
+  margin-left: 20px;
+  padding-top: 10px;
+
+}
+.card-product {
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  --main-focus: #2d8cf0;
+  width: 230px;
+  height: 395px;
+  background: var(--bg-color);
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.card:last-child {
+  justify-content: flex-end;
+}
+
+.card-img {
+  /* clear and add new css */
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+}
+
+.card-img .img {
+  /* delete */
+  transform: scale(1);
+  position: relative;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  border-top-left-radius: 80px 50px;
+  border-top-right-radius: 80px 50px;
+  border: 2px solid black;
+  background-color: #228b22;
+  background-image: linear-gradient(
+    to top,
+    transparent 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 13px,
+    transparent 13px
+  );
+}
+
+.card-img .img::before {
+  /* delete */
+  content: "";
+  position: absolute;
+  width: 65px;
+  height: 110px;
+  margin-left: -32.5px;
+  left: 50%;
+  bottom: -4px;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.7) 30%,
+      transparent 30%
+    ),
+    linear-gradient(
+      to top,
+      transparent 17px,
+      rgba(0, 0, 0, 0.3) 17px,
+      rgba(0, 0, 0, 0.3) 20px,
+      transparent 20px
+    ),
+    linear-gradient(to right, black 2px, transparent 2px),
+    linear-gradient(to left, black 2px, transparent 2px),
+    linear-gradient(to top, black 2px, #228b22 2px);
+  background-size: 60% 10%, 100% 100%, 100% 65%, 100% 65%, 100% 50%;
+  background-position: center 3px, center bottom, center bottom, center bottom,
+    center bottom;
+  border-radius: 0 0 4px 4px;
+  z-index: 2;
+}
+
+.card-img .img::after {
+  /* delete */
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  left: 50%;
+  top: -13px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(80deg, #ffc0cb 45%, transparent 45%),
+    linear-gradient(-175deg, #ffc0cb 45%, transparent 45%),
+    linear-gradient(80deg, rgba(0, 0, 0, 0.2) 51%, rgba(0, 0, 0, 0) 51%),
+    linear-gradient(-175deg, rgba(0, 0, 0, 0.2) 51%, rgba(0, 0, 0, 0) 51%),
+    radial-gradient(
+      circle at center,
+      #ffa6b6 45%,
+      rgba(0, 0, 0, 0.2) 45%,
+      rgba(0, 0, 0, 0.2) 52%,
+      rgba(0, 0, 0, 0) 52%
+    ),
+    linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0.2) 48%,
+      rgba(0, 0, 0, 0.2) 52%,
+      rgba(0, 0, 0, 0) 52%
+    ),
+    linear-gradient(
+      65deg,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0.2) 48%,
+      rgba(0, 0, 0, 0.2) 52%,
+      rgba(0, 0, 0, 0) 52%
+    ),
+    linear-gradient(
+      22deg,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0.2) 48%,
+      rgba(0, 0, 0, 0.2) 54%,
+      rgba(0, 0, 0, 0) 54%
+    );
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+    100% 75%, 100% 95%, 100% 60%;
+  background-position: center center;
+  border-top-left-radius: 120px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 70px;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--font-color);
+}
+
+.card-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--font-color-sub);
+}
+
+.card-divider {
+  width: 100%;
+  border: 1px solid var(--main-color);
+  border-radius: 50px;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--font-color);
+}
+
+.card-price span {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--font-color-sub);
+}
+
+.card-btn {
+  height: 35px;
+  background: var(--bg-color);
+  border: 2px solid var(--main-color);
+  border-radius: 5px;
+  padding: 0 15px;
+  transition: all 0.3s;
+}
+
+.card-btn svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--main-color);
+  transition: all 0.3s;
+}
+
+.card-img:hover {
+  transform: translateY(-3px);
+}
+
+.card-btn:hover {
+  border: 2px solid var(--main-focus);
+}
+
+.card-btn:hover svg {
+  fill: var(--main-focus);
+}
+
+.card-btn:active {
+  transform: translateY(3px);
+}
+.card-Profile-Info{
+  margin-right: 50px;
+  margin-left: 45px;
+  padding-top: 15px;
+  width: 300px;
+  height: auto;
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-size: 19px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--font-color);
+}
+
+.Btn-Editar-Profile-Info {
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 0px 20px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(70, 69, 71);
+  transition-duration: .3s;
+}
+
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 9px;
+  fill: white;
+  transition-duration: .3s;
+}
+
+.Btn-Editar-Profile-Info:hover {
+  color: transparent;
+}
+
+.Btn-Editar-Profile-Info:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: .3s;
+}
+
+.Btn-Editar-Profile-Info:active {
+  transform: translate(3px , 3px);
+  transition-duration: .3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+.card-UpdateInfo{
+  margin-right: 50px;
+  margin-left: 45px;
+  width:500px;
+  height: 300px;
+}
+
+
+.card-direcciones {
+  margin-right: 40px;
+  margin-left: 20px;
+  padding-top: 15px;
+  width: 300px;
+  height: auto;
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-size: 19px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--font-color);
+}
+
+.card-UpdateInfoDirecciones{
+  margin-left: 20px;
+  padding-top: 10px;
+  width: 500px;
+  height: 350px;
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--font-color);
+}
+.card-UpdateInfoDirecciones-textArea{
+  width: 450px;
+  height: 100px;
+}
+
+.card-UpdateInfoDirecciones-BtnEditar {
+  margin-left:5px;
+  height: 45px;
+}
+
+.pagination {
+  padding-top: 20px;
+  margin-left: 500px;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.card-body-product {
+  width: 215px;
+  height: 400px;
+  padding: .8em;
+  background: #f5f5f5;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
+
+ .card-img-product {
+  background-color: #ffcaa6;
+  height: 25%;
+  width: 100%;
+  border-radius: .5rem;
+  transition: .3s ease;
+ }
+
+ .card-info-product {
+  padding-top: 10%;
+ }
+ .card-footer-product {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+ }
+ /*Text*/
+ .text-title-product {
+  font-weight: 900;
+  font-size: 1.2em;
+  line-height: 1.5;
+ }
+ 
+ .text-body-product {
+  font-size: .9em;
+  padding-bottom: 10px;
+ }
+ 
+ /*Button*/
+ .card-button-product{
+  padding-top: 80px;
+ }
+ 
+ /*Hover*/
+ .card-img-product:hover {
+  transform: translateY(-25%);
+  box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+ }
+
+
+.card-container-productSearch{
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.container-ProductSearch{
+  padding-left: 75px;  
+}
+
+.card-body-product-productSearch{
+  width: 400px;
+  height: 400px;
+  padding: .8em;
+  background: #f5f5f5;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
+
+ .card-image-productSearch{
+  width: 700px;
+  height: 500px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+ }
+ .card-image-productS {
+  width: auto;
+  height: auto;
+ }
+

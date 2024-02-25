@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask Store</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',
+    filename='/css/main.css')}}"
+    />
+  </head>
+  <di>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('UserIndexProfile') }}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+          </svg></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('UserIndex') }}">Store</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+              Categorias
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{{ url_for('userLogguedCatTec') }}"
+                  >Tecnologia Y Electronicos</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{{ url_for('userLogguedCatElectro') }}"
+                  >Electrodomesticos</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{{ url_for('userLogguedCatHogar') }}"
+                  >Hogar</a
+              </li> 
+            </ul>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('UserLogout') }}">Logout</a>
+            </li>
+            <!-- Button trigger modal -->
+            <li class="nav-item">
+              <a class="btn btn-"data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                Carrito
+              </a>
+            </li>  
+          </ul>
+          
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="search-input"
+            />
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="col-md-4 offset-md-4 pt-3">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+        in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ messages.0 }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+    </div>
+    <!--Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Carrito de compras</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card" style="width: 28rem;">
+              {% for producto in dataCarr %}
+                <ul class="list-group list-group-flush">
+                  <div class="data-section carrito-container">
+                    <h3>{{ producto[1] }}</h3>
+                    <h5>₡{{ producto[2] }}</h5>
+                    <a href="/deleteProduct/{{ producto[0] }}"
+                    class="card-link btn btn-dark">
+                    Eliminar producto
+                    </a>
+                  </div>
+                </ul>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="data-section total-amount">
+            <h3>total a pagar: {{ totalAmount }}</h3>
+            <h5></h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div
+    id="search-results"
+    class="card position-absolute top-17 end-0 translate-middle-y mt-4 col-md-2 card mt-2 hidden-card-result"
+  >
+    <div
+      class="card mt-2 hidden-card-result"
+      data-bs-toggle="popover"
+      data-bs-title="Popover title"
+    >
+      <div class="card-body" id="card-result">
+        <div class="list-group pt-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center pt-5">
+    {% for producto in productos %}
+      <div class="col-md-2">
+        <div class="card-body-product">
+          <div class="card-img-product">
+            <img
+              src="{{ url_for('static', filename='images/razer-bundles.jpg') }}"
+              class="card-img-top"
+              alt="razer-bundles"
+            />
+          </div>
+          <div class="card-info-product">
+            <p class="text-title-product">
+              {{ producto['nombre'] }}
+            </p>
+            <p class="text-body-product">Lorem Text</p>
+          </div>
+          <div class="card-footer-product">
+            <p class="text-title-product">Precio: ₡ {{ producto['precio'] }}</p>
+          </div>
+          <div class="card-body button-container card-button-product">
+            <a
+              href="/agregarCarrito/{{ producto['id'] }}"
+              class="card-link btn btn-dark CartBtn"
+            >
+            <span class="IconContainer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 576 512"
+                fill="rgb(17, 17, 17)"
+                class="cart"
+              >
+              <path
+                d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+              ></path>
+              </svg>
+            </span>
+              <p class="text">Carrito</p>
+            </a>
+            <a href="/AgregarListaDeDeseos/{{producto['id']}}" class="card-link btn btn-dark deseo-button">
+              <svg
+                viewBox="0 0 17.503 15.625"
+                height="10"
+                width="10"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+              <path
+                transform="translate(0 0)"
+                  d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z"
+                    id="Fill"
+              ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pagination">
+      <a class="btn btn-dark" href="/user/index/CategoriaHogar?page=[1]">Primera</a>
+      <a class="btn btn-dark" href="/user/index/CategoriaHogar?page={{ prevPage }}">Anterior</a>
+      <a class="btn btn-dark" href="/user/index/CategoriaHogar?page={{ nextPage }}">Siguiente</a>
+      <a class="btn btn-dark" href="/user/index/CategoriaHogar?page={{ totalPages }}">Última</a>
+    </div>
+  </div>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+  crossorigin="anonymous"
+  ></script>
+  <script src="{{url_for('static',
+  filename='/js/searchProductLog.js')}}"></script>
+  </body>
+</html>

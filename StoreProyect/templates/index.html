@@ -21,7 +21,7 @@ class="card position-absolute top-17 end-0 translate-middle-y mt-4 col-md-2 card
     <div class="col-md-8">
       <div id="carouselExampleInterval" class="carousel slide pt-5" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
+          <div class="carousel-item active" data-bs-interval="2000">
             <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="d-block w-100 h-100" alt="ps5-product" />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
@@ -43,63 +43,50 @@ class="card position-absolute top-17 end-0 translate-middle-y mt-4 col-md-2 card
     </div>
   </div>
 </div>
-</div>
 <div class="row justify-content-center pt-5">
-  <div class="col-md-10">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card h-100">
-          <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="card-img-top" alt="razer-bundles">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
+{% for data in productos %}
+  <div class="col-md-2">
+    <div class="card-body-product">
+      <div class="card-img-product">
+        <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="card-img-top" alt="razer-bundles">
       </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="card-img-top" alt="razer-bundles">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a short card.</p>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
+      <div class="card-info-product">
+        <p class="text-title-product">{{data[1]}}</p>
+        <p class="text-body-product">Lorem Text</p>
       </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="card-img-top" alt="razer-bundles">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
+      <div class="card-footer-product">
+        <p class="text-title-product">Precio: ₡ {{ data[3] }}</p>
       </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="{{ url_for('static', filename='images/razer-bundles.jpg') }}" class="card-img-top" alt="razer-bundles">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
+      <div class="card-body button-container">
+        <a href="/agregarCarrito/{{ data[0] }}" class="card-link btn btn-dark CartBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </a>
+        <a href="/AgregarListaDeDeseos/{{data[0]}}" class="card-link btn btn-dark CartBtn">
+          <svg
+            viewBox="0 0 17.503 15.625"
+            height="10"
+            width="10"
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+          >
+            <path
+              transform="translate(0 0)"
+              d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z"
+              id="Fill"
+            ></path>
+          </svg>
+        </a>
       </div>
     </div>
+  </div>
+{% endfor %}
 </div>
+<div class="pagination">
+  <a class="btn btn-dark" href="{{ url_for('Index', page=1) }}">Primera</a>
+  <a class="btn btn-dark" href="{{ url_for('Index', page=prev_page) }}">Anterior</a>
+  <a class="btn btn-dark" href="{{ url_for('Index', page=next_page) }}">Siguiente</a>
+  <a class="btn btn-dark" href="{{ url_for('Index', page=total_pages) }}">Última</a>
 </div>
 {% endblock %}
